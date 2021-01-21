@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <string name="app_name">Securino</string>
+  <string name="watchdog_running">"Ο παρατηρητής του Securino εκτελείται"</string>
+  <string name="alarm_offline">"Το σύστημα είναι αποσυνδεμένο"</string>
+  <string name="alarm">"Συναγερμός: "</string>
+  <string name="pir_triggered">"Ο σένσορας υπέρυθρων ενεργοποιήθηκε"</string>
+  <string name="magnet_triggered">"Ο μαγνητικός σένσορας ενεργοποιήθηκε</string>
+  <string name="sensor_offline">"Αποσυνδεδεμένος σένσορας"</string>
+  <string name="invalid_pin">"Λάθος PIN"</string>
+  <string name="disarmed">"Αφοπλισμένος"</string>
+  <string name="arm">"Όπλιση"</string>
+  <string name="away">" εκ των εσω"</string>
+  <string name="stay">"για έξοδο"</string>
+  <string name="state_changed">"Αλλαγή κατάστασης σε"</string>
+  <string name="request_failed">"Αδυναμία επικοινωνίας με τον εξυπηρετητή"</string>
+</resources>

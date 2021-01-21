@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:prism="http://prismlibrary.com"
+      prism:DialogLayout.UseMask="False"
+      prism:DialogLayout.RelativeWidthRequest="1"
+      prism:DialogLayout.RelativeHeightRequest="1"
+      x:Class="Securino.Dialogs.Views.ToastDialog"
+      x:Name="RootObject"
+      VerticalOptions="End"
+      HorizontalOptions="FillAndExpand"
+      Margin="20,20">
+
+    <!-- Toast Background -->
+    <BoxView x:Name="Background"
+             BackgroundColor="{StaticResource AccentColor}"
+             CornerRadius="5"
+             Opacity="0.9" />
+
+    <!-- Toast Text -->
+    <Label TextColor="{StaticResource LightColor}"
+           HorizontalTextAlignment="Center"
+           Text="{Binding ToastText}"
+           Margin="10,10" />
+
+</Grid>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Securino</string>
+	<string name="watchdog_running">"Securino Watchdog is running"</string>
+	<string name="alarm_offline">"System is offline"</string>
+	<string name="alarm">"Alarm: "</string>
+	<string name="pir_triggered">"PIR sensor triggered"</string>
+	<string name="magnet_triggered">"Magnet sensor triggered</string>
+	<string name="sensor_offline">"Sensor Offline"</string>
+	<string name="invalid_pin">"Invalid PIN"</string>
+	<string name="disarmed">"Disarmed"</string>
+	<string name="arm">"Arm"</string>
+	<string name="away">"Away"</string>
+	<string name="stay">"Stay"</string>
+	<string name="state_changed">"State changed to"</string>
+	<string name="request_failed">"Failed to communicate with server"</string>
+</resources>

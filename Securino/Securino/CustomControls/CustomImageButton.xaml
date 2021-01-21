@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<forms9Patch:Image xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+                   x:Class="Securino.CustomControls.CustomImageButton"
+                   x:Name="RootObject">
+
+    <forms9Patch:Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="GestureRecognizer_Tapped"
+                              NumberOfTapsRequired="1" />
+    </forms9Patch:Image.GestureRecognizers>
+</forms9Patch:Image>

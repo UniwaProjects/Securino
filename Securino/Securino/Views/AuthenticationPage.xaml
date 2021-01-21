@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:prism="http://prismlibrary.com"
+                xmlns:forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+                xmlns:views="clr-namespace:Securino.Views;assembly=Securino"
+                prism:ViewModelLocator.AutowireViewModel="True"
+                x:Class="Securino.Views.AuthenticationPage">
+
+    <!-- Loading Image-->
+    <forms9Patch:Image x:Name="LoadingImage"
+                       Style="{StaticResource LoadingImage}"
+                       TintColor="{StaticResource AccentColor}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+
+</views:PageBase>

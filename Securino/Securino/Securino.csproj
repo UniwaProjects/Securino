@@ -1,0 +1,83 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Images\ic_arm_away.svg" />
+    <None Remove="Assets\Images\ic_book.svg" />
+    <None Remove="Assets\Images\ic_circle.svg" />
+    <None Remove="Assets\Images\ic_disarm.svg" />
+    <None Remove="Assets\Images\ic_disconnected.svg" />
+    <None Remove="Assets\Images\ic_fingerprint.svg" />
+    <None Remove="Assets\Images\ic_home.svg" />
+    <None Remove="Assets\Images\ic_loading.svg" />
+    <None Remove="Assets\Images\ic_not_secure.svg" />
+    <None Remove="Assets\Images\ic_refresh.svg" />
+    <None Remove="Assets\Images\ic_scan.svg" />
+    <None Remove="Assets\Images\ic_secure.svg" />
+    <None Remove="Assets\Images\ic_smartphone_lock.svg" />
+    <None Remove="Assets\Images\ic_triggered.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Images\ic_arm_away.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_book.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_circle.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_disarm.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_disconnected.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_fingerprint.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_home.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_loading.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_not_secure.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_refresh.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_scan.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_secure.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_smartphone_lock.svg" />
+    <EmbeddedResource Include="Assets\Images\ic_triggered.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Forms9Patch" Version="2.4.2" />
+    <PackageReference Include="SkiaSharp" Version="2.80.2" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1239" />
+    <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
+    <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CustomControls\SecurityImage.xaml.cs">
+      <DependentUpon>SecurityImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\AppResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AuthenticationPage.xaml.cs">
+      <DependentUpon>AuthenticationPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="CustomControls\SecurityImage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\AppResources.el-GR.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AlarmPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PageBase.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+      xmlns:extensionsXaml="clr-namespace:Securino.ExtensionsXAML;assembly=Securino"
+      x:Class="Securino.CustomControls.SecurityImage">
+
+    <!-- Border Image -->
+    <forms9Patch:Image x:Name="CircleImage"
+                       Source="{extensionsXaml:ImageResourceExtension ic_circle.svg}"
+                       HeightRequest="250"
+                       WidthRequest="250"
+                       TintColor="{StaticResource AccentColor}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+
+    <!-- Badge Image -->
+    <forms9Patch:Image x:Name="BadgeImage"
+                       Source="{extensionsXaml:ImageResourceExtension ic_secure.svg}"
+                       HeightRequest="150"
+                       WidthRequest="150"
+                       TintColor="{StaticResource AccentColor}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+</Grid>

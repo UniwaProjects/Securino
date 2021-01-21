@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:views="clr-namespace:Securino.Views;assembly=Securino"
+                xmlns:extensionsXaml="clr-namespace:Securino.ExtensionsXAML;assembly=Securino"
+                xmlns:customControls="clr-namespace:Securino.CustomControls;assembly=Securino"
+                xmlns:forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+                xmlns:converters="clr-namespace:Securino.Helpers.Converters;assembly=Securino"
+                x:Class="Securino.Views.AlarmPage"
+                x:Name="RootObject">
+
+    <views:PageBase.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontSize"
+                    Value="{StaticResource TitleText}" />
+            <Setter Property="FontAttributes"
+                    Value="Bold" />
+            <Setter Property="HorizontalOptions"
+                    Value="Center" />
+            <Setter Property="VerticalOptions"
+                    Value="Center" />
+            <Setter Property="Margin"
+                    Value="0,20,0,0" />
+        </Style>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InvertBool" />
+        </ResourceDictionary>
+    </views:PageBase.Resources>
+
+    <Grid Margin="20,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Refresh Button -->
+        <customControls:CustomImageButton
+            Command="{Binding BindingContext.RefreshCommand, Source={x:Reference RootObject}}"
+            ImageName="ic_refresh.svg"
+            TintColor="{StaticResource AccentColor}"
+            Grid.Row="0"
+            Grid.Column="0"
+            HeightRequest="40"
+            WidthRequest="40"
+            VerticalOptions="Center"
+            HorizontalOptions="Start" />
+
+        <!-- Last device update -->
+        <Label Text="{Binding UbidotsModel.LastUpdated}"
+               TextColor="{StaticResource LightColor}"
+               FontSize="{StaticResource BigText}"
+               Grid.Row="0"
+               Grid.Column="1"
+               HorizontalOptions="End"
+               VerticalOptions="Center" />
+
+        <!-- Disconnected View -->
+        <StackLayout IsVisible="{Binding UbidotsModel.IsOnline, Converter={StaticResource InvertBool}}"
+                     Grid.Row="1"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     VerticalOptions="CenterAndExpand">
+            <forms9Patch:Image 
+                           Source="{extensionsXaml:ImageResourceExtension ic_disconnected.svg}"
+                           HeightRequest="250"
+                           WidthRequest="250"
+                           TintColor="{StaticResource ErrorColor}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+
+            <Label Text="{extensionsXaml:TranslateExtension Name=offline, IsUppercase=True}"
+                   TextColor="{StaticResource ErrorColor}"
+                   Style="{StaticResource LabelStyle}"/>
+        </StackLayout>
+
+        <!-- Connected View -->
+        <StackLayout IsVisible="{Binding UbidotsModel.IsOnline}"
+              Grid.Row="1"
+              Grid.Column="0"
+              Grid.ColumnSpan="2"
+              VerticalOptions="FillAndExpand">
+
+            <!-- Device Status image -->
+            <customControls:SecurityImage Triggered="{Binding BindingContext.UbidotsModel.IsAlarmTriggered, Source={x:Reference RootObject}}"
+                                          Disarmed="{Binding BindingContext.UbidotsModel.IsDisarmed, Source={x:Reference RootObject}}"
+                                          VerticalOptions="EndAndExpand"/>
+
+            <Grid>
+                <Grid IsVisible="{Binding BindingContext.UbidotsModel.IsAlarmTriggered, Converter={StaticResource InvertBool}, Source={x:Reference RootObject}}">
+                    <Label Text="{extensionsXaml:TranslateExtension Name=armedAway, IsUppercase=True}"
+                       IsVisible="{Binding BindingContext.UbidotsModel.IsArmAway, Source={x:Reference RootObject}}"
+                       TextColor="{StaticResource AccentColor}"
+                       Style="{StaticResource LabelStyle}"/>
+
+                    <Label Text="{extensionsXaml:TranslateExtension Name=armedStay, IsUppercase=True}"
+                       IsVisible="{Binding BindingContext.UbidotsModel.IsArmStay, Source={x:Reference RootObject}}"
+                       TextColor="{StaticResource AccentColor}"
+                       Style="{StaticResource LabelStyle}"/>
+
+                    <Label Text="{extensionsXaml:TranslateExtension Name=disarmed, IsUppercase=True}"
+                       IsVisible="{Binding BindingContext.UbidotsModel.IsDisarmed, Source={x:Reference RootObject}}"
+                       TextColor="{StaticResource ErrorColor}"
+                       Style="{StaticResource LabelStyle}"/>
+                </Grid>
+
+                <Label Text="{extensionsXaml:TranslateExtension Name=triggered, IsUppercase=True}"
+                       IsVisible="{Binding BindingContext.UbidotsModel.IsAlarmTriggered, Source={x:Reference RootObject}}"
+                       TextColor="{StaticResource ErrorColor}"
+                       Style="{StaticResource LabelStyle}"/>
+            </Grid>
+
+            <!-- Arm Buttons -->
+            <StackLayout Spacing="20"
+                         VerticalOptions="EndAndExpand">
+
+                <!-- Arm away button -->
+                <customControls:BorderedButton LeftImageSource="ic_arm_away.svg"
+                                               Command="{Binding BindingContext.ArmAwayCommand, Source={x:Reference RootObject}}"
+                                               ButtonText="{extensionsXaml:TranslateExtension Name=armAway}"
+                                               TextSize="{StaticResource TitleText}"
+                                               HeightRequest="50" />
+
+                <!-- Arm stay button -->
+                <customControls:BorderedButton LeftImageSource="ic_home.svg"
+                                               Command="{Binding BindingContext.ArmStayCommand, Source={x:Reference RootObject}}"
+                                               ButtonText="{extensionsXaml:TranslateExtension Name=armStay}"
+                                               TextSize="{StaticResource TitleText}"
+                                               HeightRequest="50" />
+
+                <!-- Disarm button -->
+                <customControls:BorderedButton LeftImageSource="ic_disarm.svg"
+                                               Command="{Binding BindingContext.DisarmCommand, Source={x:Reference RootObject}}"
+                                               ButtonText="{extensionsXaml:TranslateExtension Name=disarm}"
+                                               AccentColor="{StaticResource ErrorColor}"
+                                               TextSize="{StaticResource TitleText}"
+                                               HeightRequest="50" />
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</views:PageBase>

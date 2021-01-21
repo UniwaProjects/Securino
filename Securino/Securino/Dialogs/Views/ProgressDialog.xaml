@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+      x:Class="Securino.Dialogs.Views.ProgressDialog">
+
+    <!-- Loading Image-->
+    <forms9Patch:Image x:Name="LoadingImage"
+                       Style="{StaticResource LoadingImage}"
+                       TintColor="{StaticResource AccentColor}" />
+</Grid>
