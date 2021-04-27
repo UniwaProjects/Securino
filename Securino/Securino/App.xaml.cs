@@ -21,8 +21,6 @@ namespace Securino
     using Securino.Views;
 
     using Xamarin.Essentials;
-    using Xamarin.Essentials.Implementation;
-    using Xamarin.Essentials.Interfaces;
     using Xamarin.Forms;
 
     /// <summary>
@@ -45,6 +43,8 @@ namespace Securino
         protected override async void OnInitialized()
         {
             this.InitializeComponent();
+
+            Application.Current.UserAppTheme = OSAppTheme.Light;
 
             // Register for connectivity changes, be sure to unsubscribe when finished
             Connectivity.ConnectivityChanged += this.Connectivity_ConnectivityChanged;
@@ -73,8 +73,6 @@ namespace Securino
         /// <param name="containerRegistry"> The container registry. </param>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
-
             // Navigation Pages
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<AuthenticationPage, AuthenticationPageViewModel>();

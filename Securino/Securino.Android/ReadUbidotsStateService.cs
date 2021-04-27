@@ -10,13 +10,11 @@
 namespace Securino.Droid
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Android.App;
     using Android.Content;
     using Android.OS;
-    using Android.Service.Notification;
 
     using AndroidX.Core.App;
 
@@ -46,11 +44,6 @@ namespace Securino.Droid
         public const string ServiceStartedKey = "SECURINO_WATCHDOWN_STARTED";
 
         /// <summary>
-        ///     The max inbox notifications.
-        /// </summary>
-        private const int MaxInboxNotifications = 6;
-
-        /// <summary>
         ///     The request interval. Gets the new state every 30 seconds.
         /// </summary>
         private const int RequestInterval = 120000;
@@ -59,31 +52,6 @@ namespace Securino.Droid
         ///     The context.
         /// </summary>
         private readonly Context context = Application.Context;
-
-        /// <summary>
-        ///     The message queue.
-        /// </summary>
-        private readonly Queue<string> messageQueue;
-
-        /// <summary>
-        ///     The inbox style for multiple notifications.
-        /// </summary>
-        private NotificationCompat.InboxStyle inboxStyle;
-
-        /// <summary>
-        ///     The message counter, inbox style can handle up to MaxInboxNotifications.
-        /// </summary>
-        private int messageCounter;
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ReadUbidotsStateService" /> class.
-        /// </summary>
-        public ReadUbidotsStateService()
-        {
-            // Create a new queue and inbox
-            this.messageQueue = new Queue<string>();
-            this.inboxStyle = new NotificationCompat.InboxStyle();
-        }
 
         /// <summary>
         ///     The on bind.
@@ -225,55 +193,6 @@ namespace Securino.Droid
         }
 
         /// <summary>
-        ///     Build inbox style with the last notification being the latest.
-        /// </summary>
-        /// <param name="messageBody"> The message body. </param>
-        private void BuildInboxStyle(string messageBody)
-        {
-            NotificationManager notificationManager = NotificationManager.FromContext(this.context);
-
-            // Get currently active notifications
-            StatusBarNotification[] activeNotifications = notificationManager.GetActiveNotifications();
-
-            if (activeNotifications.Length == 0)
-            {
-                // For 0 notifications, clear the inbox, the queue and the counter
-                this.inboxStyle = new NotificationCompat.InboxStyle();
-                this.messageQueue.Clear();
-                this.messageCounter = 0;
-            }
-            else
-            {
-                // Else increase the counter
-                this.messageCounter++;
-            }
-
-            // Enqueue the new message
-            this.messageQueue.Enqueue(messageBody);
-
-            // For a counter bigger than the inbox notifications
-            if (this.messageCounter > MaxInboxNotifications)
-            {
-                // Clear the notifications
-                this.inboxStyle = new NotificationCompat.InboxStyle();
-
-                // Remove the oldest
-                this.messageQueue.Dequeue();
-
-                // Add the rest to the new inbox
-                foreach (string message in this.messageQueue)
-                {
-                    this.inboxStyle.AddLine(message);
-                }
-            }
-            else
-            {
-                // Else just add the notification to the inbox
-                this.inboxStyle.AddLine(messageBody);
-            }
-        }
-
-        /// <summary>
         ///     The send notification.
         /// </summary>
         /// <param name="messageBody"> The message body. </param>
@@ -286,29 +205,30 @@ namespace Securino.Droid
             string dateTime = $"| {date} {time}";
             string finalMessage = $"{messageBody} {dateTime}";
 
-            this.BuildInboxStyle(finalMessage);
-
             // Build and show the notifications
             Intent intent = new Intent(this.context, typeof(MainActivity));
-            intent.AddFlags(ActivityFlags.ClearTop);
+            intent.AddFlags(ActivityFlags.ClearTop | ActivityFlags.SingleTop);
             PendingIntent pendingIntent = PendingIntent.GetActivity(
                 this.context,
                 0,
                 intent,
-                PendingIntentFlags.OneShot);
+                PendingIntentFlags.UpdateCurrent);
 
             NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this.context, MainActivity.ChannelId);
 
             // Standard notification content
-            notificationBuilder.SetSmallIcon(Resource.Drawable.icon).SetAutoCancel(true).SetShowWhen(false)
-                .SetStyle(this.inboxStyle).SetContentIntent(pendingIntent);
+            notificationBuilder.SetContentIntent(pendingIntent).SetSmallIcon(Resource.Drawable.icon)
+                .SetStyle(new NotificationCompat.BigTextStyle()).SetAutoCancel(true).SetShowWhen(false)
+                .SetOngoing(true);
 
             // Add the priority and the text message to support older API (25 or older)
-            notificationBuilder.SetPriority((int)NotificationPriority.High).SetContentText(finalMessage);
+            notificationBuilder.SetPriority(NotificationCompat.PriorityHigh).SetContentText(finalMessage);
 
             // Get the notification manager and notify
-            NotificationManager.FromContext(this.context).Notify(1, notificationBuilder.Build());
+            NotificationManager.FromContext(this.context)?.Notify(
+                DateTime.Now.Millisecond,
+                notificationBuilder.Build());
         }
     }
 }

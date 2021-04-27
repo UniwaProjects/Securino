@@ -13,6 +13,8 @@ namespace Securino.Droid
     using Android.Content.PM;
     using Android.OS;
 
+    using AndroidX.AppCompat.App;
+
     using Forms9Patch.Droid;
 
     using Prism;
@@ -74,6 +76,8 @@ namespace Securino.Droid
         /// </param>
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
+
             // Set the instance
             Instance = this;
 

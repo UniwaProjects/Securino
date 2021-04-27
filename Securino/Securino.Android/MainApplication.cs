@@ -5,6 +5,8 @@ namespace Securino.Droid
     using Android.App;
     using Android.Runtime;
 
+    using AndroidX.AppCompat.App;
+
     using Xamarin.Essentials;
 
     [Application(Theme = "@style/MainTheme")]

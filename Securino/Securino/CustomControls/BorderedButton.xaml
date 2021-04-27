@@ -12,7 +12,7 @@
     <!-- Tint BoxView -->
     <BoxView x:Name="LargeBox"
              Color="{StaticResource PrimaryColor}"
-             CornerRadius="5" />
+             CornerRadius="50" />
 
     <!-- Content -->
     <StackLayout Orientation="Horizontal"
