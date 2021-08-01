@@ -44,8 +44,6 @@ namespace Securino
         {
             this.InitializeComponent();
 
-            Application.Current.UserAppTheme = OSAppTheme.Light;
-
             // Register for connectivity changes, be sure to unsubscribe when finished
             Connectivity.ConnectivityChanged += this.Connectivity_ConnectivityChanged;
 

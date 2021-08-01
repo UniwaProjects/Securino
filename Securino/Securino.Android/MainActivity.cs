@@ -76,8 +76,6 @@ namespace Securino.Droid
         /// </param>
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
-
             // Set the instance
             Instance = this;
 

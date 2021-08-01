@@ -42,7 +42,7 @@
     <PackageReference Include="Forms9Patch" Version="2.4.9" />
     <PackageReference Include="SkiaSharp" Version="2.80.2" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
   </ItemGroup>
 

@@ -731,7 +731,7 @@ namespace Securino.Models
                 /// <summary>
                 ///     The magnet triggered.
                 /// </summary>
-                public const double MagnetTriggered = 1.0;
+                public const double MagnetTriggered = 2.0;
 
                 /// <summary>
                 ///     The none.
@@ -746,7 +746,7 @@ namespace Securino.Models
                 /// <summary>
                 ///     The pir triggered.
                 /// </summary>
-                public const double PirTriggered = 2.0;
+                public const double PirTriggered = 1.0;
             }
 
             /// <summary>

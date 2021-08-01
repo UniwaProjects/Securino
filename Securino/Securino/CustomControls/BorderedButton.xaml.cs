@@ -101,25 +101,6 @@ namespace Securino.CustomControls
             BindingMode.TwoWay);
 
         /// <summary>
-        ///     The left image tint property.
-        ///     Will change the tint of the left image.
-        ///     Has to be set after the image.
-        /// </summary>
-        public static readonly BindableProperty LeftImageTintProperty = BindableProperty.Create(
-            nameof(LeftImageTint),
-            typeof(Color),
-            typeof(BorderedButton),
-            default(Color),
-            propertyChanged: (bindable, value, newValue) =>
-                {
-                    BorderedButton targetView = (BorderedButton)bindable;
-                    if (targetView != null)
-                    {
-                        targetView.LeftImage.TintColor = (Color)newValue;
-                    }
-                });
-
-        /// <summary>
         ///     The size of the button text.
         /// </summary>
         public static readonly BindableProperty TextSizeProperty = BindableProperty.Create(
@@ -205,15 +186,6 @@ namespace Securino.CustomControls
         }
 
         /// <summary>
-        ///     Gets or sets the left image tint.
-        /// </summary>
-        public Color LeftImageTint
-        {
-            get => (Color)this.GetValue(LeftImageTintProperty);
-            set => this.SetValue(LeftImageTintProperty, value);
-        }
-
-        /// <summary>
         ///     The light color.
         /// </summary>
         public Color LightColor => (Color)Application.Current.Resources["LightColor"];
@@ -257,8 +229,8 @@ namespace Securino.CustomControls
         {
             if (this.Enabled)
             {
-                this.LeftImage.TintColor = this.PrimaryColor;
-                this.LabelField.TextColor = this.PrimaryColor;
+                this.LeftImage.TintColor = this.LightColor;
+                this.LabelField.TextColor = this.LightColor;
                 this.LargeBox.Color = this.AccentColor;
             }
             else
@@ -331,23 +303,6 @@ namespace Securino.CustomControls
                 view.LeftImage.Source = null;
                 view.LeftImage.WidthRequest = 0;
                 view.LeftImage.Margin = new Thickness(0, 0);
-            }
-        }
-
-        /// <summary>
-        ///     The on highlight property changed.
-        /// </summary>
-        /// <param name="bindable"> The bind-able. </param>
-        /// <param name="oldValue"> The old value. </param>
-        /// <param name="newValue"> The new value. </param>
-        private static void OnHighlightPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            BorderedButton borderedButton = (BorderedButton)bindable;
-            if ((bool)newValue)
-            {
-                borderedButton.LabelField.TextColor = borderedButton.AccentColor;
-                borderedButton.LeftImage.TintColor = borderedButton.AccentColor;
-                borderedButton.LargeBox.Color = borderedButton.AccentColor;
             }
         }
 
